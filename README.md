@@ -19,6 +19,21 @@
 
 ---
 
+## 🎵 时光回响 (Audio Ambience)
+
+> _"Even though you broke my heart. And killed me. And tore me into pieces. And threw every piece into a fire..."_
+
+当你漫步在这座数字藏馆时，背景中静静流淌的是来自《Portal (传送门)》的经典曲目 —— **"Still Alive"**。
+
+这不仅仅是一首歌，它是人工智能 GLaDOS 在实验室余烬中的孤寂吟唱，更是这座藏馆的灵魂。在本项目中，它承载着特殊的寓意：
+
+- **记忆的生命力**：正如歌词所述，尽管岁月流逝，那些曾在屏幕前跳动的热忱与感动，依然在代码与像素间“Still Alive”。
+- **永不停歇的探索**：_“Science is still being done.”_ 这里记录的每一款游戏，都是一次思维的实验，一段未完待续的人生。
+
+这首歌的旋律，连接着 2001 年那个初见微光的少年，与 2026 年依然深爱游戏的你。
+
+---
+
 ## 🖼️ 视觉画廊 (Visual Showcase)
 
 以下是系统实际运行效果的视觉呈现，记录了从 2023 到 2026 年的数字足迹。
