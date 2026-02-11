@@ -1,0 +1,466 @@
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #fbfbfd;
+  --text-primary: #1d1d1f;
+  --text-secondary: #86868b;
+  --accent: #000000;
+  --border-radius: 20px;
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --font-apple: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Myriad Set Pro", "SF Pro Icons", "Apple Legacy Chevron", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+[data-theme='dark'] {
+  --bg-primary: #000000;
+  --bg-secondary: #1c1c1e;
+  --text-primary: #f5f5f7;
+  --text-secondary: #a1a1a6;
+  --accent: #ffffff;
+  --glass: rgba(0, 0, 0, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-apple);
+  overflow-x: hidden;
+}
+
+.glass-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0.8rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.container {
+  max-width: 100%; /* 占据全屏宽度 */
+  margin: 0;
+  padding: 1.5rem 0.5rem; /* 极窄边距以容纳更多内容 */
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  padding-left: 2rem; /* 标题稍微内缩 */
+}
+
+/* 滚动区域样式 */
+.scrolling-wrapper {
+  overflow: hidden;
+  padding: 1rem 0;
+  position: relative;
+  /* 左右两端淡入淡出遮罩 */
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.scroll-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+
+.game-card {
+  width: 160px;
+  aspect-ratio: 2 / 3;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: transform 0.4s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.4s ease;
+  cursor: pointer;
+  background: #eee;
+  flex-shrink: 0;
+  will-change: transform; /* Hint for performance */
+}
+
+/* 总览页专用的迷你卡片 - 极致密度 */
+.game-card-mini {
+  width: 80px; /* 进一步缩小至 80px */
+  aspect-ratio: 2 / 3;
+  border-radius: 4px; /* 小圆角 */
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  background: #eee;
+  flex-shrink: 0;
+}
+
+.game-card:hover, .game-card-mini:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+
+.game-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+  .glass-nav {
+    padding: 0.8rem 1rem;
+  }
+  
+  .container {
+    padding: 1.5rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .game-card {
+    width: 120px; /* 手机端海报变小 */
+    border-radius: 12px;
+  }
+
+  .year-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+
+  .year-title {
+    font-size: 1.4rem;
+  }
+
+  .scroll-track {
+    gap: 1rem;
+  }
+}
+
+.game-card .info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.7));
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.game-card:hover .info {
+  opacity: 1;
+}
+
+/* 分类展示 */
+.year-section {
+  margin-bottom: 4rem;
+}
+
+.year-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 2rem;
+}
+
+.year-title {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  border-left: 4px solid var(--accent);
+  padding-left: 1rem;
+}
+
+.year-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  padding-left: 1.2rem;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+/* 动画定义 */
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-left {
+  animation: scrollLeft 300s linear infinite; /* 极致平缓 */
+}
+
+.animate-right {
+  animation: scrollRight 300s linear infinite;
+}
+
+.scroll-track:hover {
+  animation-play-state: paused;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px; /* 恢复为圆角矩形，不再强制圆形 */
+  object-fit: cover;
+  border: 1px solid var(--glass-border);
+  transition: filter 0.3s ease, border-color 0.3s ease;
+  /* 强制去色并增强对比度，消除原图杂色，确保显示为纯黑纯白 */
+  filter: grayscale(100%) contrast(120%);
+}
+
+/* 在暗黑模式下，反转颜色，保持纯净度 */
+[data-theme='dark'] .avatar {
+  filter: grayscale(100%) contrast(120%) invert(1);
+}
+
+/* =========================================
+   Header Styles (Migrated from Inline)
+   ========================================= */
+.app-header {
+  padding: 3rem 2rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 100%;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 24px;
+  border: none;
+}
+
+.header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.header-title {
+  font-size: 4rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.header-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  padding-left: 0.2rem;
+  white-space: nowrap;
+}
+
+.theme-toggle {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* =========================================
+   Mobile Optimization (Override Defaults)
+   ========================================= */
+@media (max-width: 768px) {
+  /* 1. Header Layout Adaptation */
+  .app-header {
+    padding: 1.5rem 1rem 0.5rem; /* Reduced bottom padding */
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    position: relative; /* For theme toggle positioning */
+    padding-bottom: 0;
+  }
+
+  .theme-toggle {
+    position: absolute;
+    top: 1.5rem;
+    right: 1rem;
+    padding: 8px; /* Slightly smaller button */
+    transform: scale(0.9);
+  }
+  
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .header-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+
+  .header-title {
+    font-size: 2.2rem; /* Better fit for small screens */
+    margin-bottom: 0.5rem;
+  }
+
+  /* 1. Scrolling Wrapper Adjustment (Ultra Dense) */
+  .scrolling-wrapper {
+    mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+    padding: 0.2rem 0;
+  }
+  
+  .scroll-track {
+    gap: 0.3rem; /* Tighter gaps */
+  }
+  
+  .game-card-mini {
+    width: 26px; /* Micro size for "desktop-like" density */
+    border-radius: 2px;
+  }
+
+  /* 2. Typography & Spacing Optimization */
+  .header-desc, .year-desc {
+    white-space: normal;
+    padding-left: 0;
+    line-height: 1.5;
+    font-size: 0.85rem; /* Smaller font */
+    max-width: 100%;
+    text-indent: 2em;
+    text-align: justify;
+    letter-spacing: 0.01em;
+    /* Darker color for readability */
+    color: #444; 
+  }
+  
+  /* Dark mode text color adjustment */
+  [data-theme='dark'] .header-desc,
+  [data-theme='dark'] .year-desc {
+    color: #bbb;
+  }
+
+  .header-desc {
+    margin-bottom: 0.5rem;
+  }
+  
+  .year-desc {
+    margin-bottom: 0.5rem; /* Tighter layout */
+  }
+
+  .year-section {
+    margin-bottom: 1.5rem; /* Reduced grouping gap */
+  }
+
+  .year-title {
+    margin-bottom: 0.2rem;
+  }
+
+  /* 3. Grid Layout (Keep 5 Columns) */
+  .year-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr) !important; 
+    gap: 0.3rem; 
+  }
+}
+
+/* =========================================
+   Minecraft Chest (Pixel Art)
+   ========================================= */
+.pixel-chest {
+  width: 64px;
+  height: 54px;
+  position: relative;
+  /* 像素化渲染 */
+  image-rendering: pixelated; 
+}
+
+.chest-lid {
+  width: 64px;
+  height: 18px;
+  background-color: #A05F19; /* Wood */
+  border: 4px solid #3F2309; /* Dark Border */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: top center;
+  box-sizing: border-box;
+}
+
+.pixel-chest.open .chest-lid {
+  transform: rotateX(-120deg) translateY(-10px);
+}
+
+.chest-body {
+  width: 64px;
+  height: 36px;
+  background-color: #A05F19;
+  border: 4px solid #3F2309;
+  border-top: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+/* 简单的纹理装饰 */
+.chest-lid::after, .chest-body::before {
+  content: '';
+  position: absolute;
+  left: 4px; right: 4px;
+  background: rgba(0,0,0,0.1);
+}
+.chest-lid::after { top: 4px; height: 4px; }
+.chest-body::before { top: 4px; bottom: 4px; border-left: 4px solid #3F2309; border-right: 4px solid #3F2309; background: transparent; }
+
+.chest-lock {
+  width: 14px;
+  height: 20px;
+  background-color: #C0C0C0; /* Silver */
+  border: 2px solid #555;
+  position: absolute;
+  top: -8px; /* 跨越盖子和箱体 */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+}
