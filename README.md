@@ -19,6 +19,37 @@
 
 ---
 
+## 🖼️ 视觉画廊 (Visual Showcase)
+
+以下是系统实际运行效果的视觉呈现，记录了从 2023 到 2026 年的数字足迹。
+
+### 🏠 总览：数字灵魂碎片
+
+![UI Overview](screenshots/ui_overview.png)
+_收录共计 272 款作品，在这比特流中永恒回响。_
+
+### 📅 2026：未完待续的诗篇
+
+![Archive 2026](screenshots/archive_2026.png)
+_手柄握在掌心，只要心怀热忱，这场名为人生的游戏就永远没有具体的终点……_
+
+### 📅 2025：独立灵魂的低语
+
+![Archive 2025](screenshots/archive_2025.png)
+_在工业化的喧嚣外，听见独立灵魂的低语。那些小而美的故事，成了我与创作者之间最亲密的共鸣。_
+
+### 📅 2024：跨越三家的边界
+
+![Archive 2024](screenshots/archive_2024.png)
+_从红蓝的联动到白色的巨塔，跨越绿三家的边界，构筑起无尽的虚拟疆域。_
+
+### 📅 2023：最纯粹的快乐
+
+![Archive 2023](screenshots/archive_2023.png)
+_绿色的 X 光标点亮了客厅的一角。摆脱繁杂的参数，我重新拥抱了主机游戏最纯粹的快乐。_
+
+---
+
 ## 🛠️ 技术栈
 
 - **前端**：Vite + React + Framer Motion + TailwindCSS (或 Vanilla CSS)
